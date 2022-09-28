@@ -1,0 +1,62 @@
+* {
+  margin: auto 0;
+  text-align: center;
+}
+
+
+
+
+body {
+  background-color: #14161b;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  color: #F7CE65;
+  font-size: 40px;
+  line-height: 200px;
+  font-family: 'Almendra', serif;
+  letter-spacing: 3px;
+}
+
+.table {
+  width: 80%;
+  background-color: #290000;
+  border: 2px solid black;
+  border-radius: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.die {
+  width: 200px;
+  height: 200px;
+  background-color: #deceb4;
+  border: 2px solid black;
+  border-radius: 16px;
+  display: block;
+}
+
+.die_type {
+  margin-top: 20px;
+  font-family: 'Almendra', serif;
+  margin-bottom: 5px;
+}
+
+button {
+  height: 75px;
+  width: 75px;
+  border-radius: 10px;
+  color: #930C10;
+  font-size: 24px;
+  font-family: 'Almendra', serif;
+  margin-bottom: 5px;
+}
