@@ -1,27 +1,40 @@
 import { useState, useEffect } from 'react'
 import logo from './assets/d20.png'
+import coinLogo from './assets/coin.png'
 
 import './App.css'
 
 function App() {
-  const [d4, setD4] = useState('✶')
-  const [allTotal, setAllTotal] = useState(0)
-  const [d6, setD6] = useState('✶')
-  const [d8, setD8] = useState('✶')
-  const [d10, setD10] = useState('✶')
-  const [d12, setD12] = useState('✶')
-  const [d20, setD20] = useState('✶')
-  const [d100a, setd100a] = useState('✶')
+  const [coin, setCoin] = useState('')
+  const [coinVal, setCoinVal] = useState('')
+  const [d4, setD4] = useState('')
+  const [d6, setD6] = useState('')
+  const [d8, setD8] = useState('')
+  const [d10, setD10] = useState('')
+  const [d12, setD12] = useState('')
+  const [d20, setD20] = useState('')
+  const [d100a, setd100a] = useState('')
+  const [allTotal, setAllTotal] = useState('')
 
-  ///ADD THE TOTAL ALL FUNCTION TO EACH DICE FUNCTION!!!
+  const coinFLip = () => {
+    let output = Math.floor(Math.random() * 3)
+    if (output === 0) {
+      coinFLip()
+    } else if (output === 1) {
+      setCoin('H')
+      setCoinVal(output)
+    } else if (output === 2) {
+      setCoin('T')
+      setCoinVal(output)
+    }
+  }
+
   const dFour = () => {
     let output = Math.floor(Math.random() * 5)
     if (output === 0) {
       dFour()
     } else {
       setD4(output)
-      let sum = d4 + d6 + d8 + d10 + d12 + d20 + d100a
-      setAllTotal(sum)
     }
   }
 
@@ -31,8 +44,6 @@ function App() {
       dSix()
     } else {
       setD6(output)
-      let sum = d4 + d6 + d8 + d10 + d12 + d20 + d100a
-      setAllTotal(sum)
     }
   }
 
@@ -42,16 +53,12 @@ function App() {
       dEight()
     } else {
       setD8(output)
-      let sum = d4 + d6 + d8 + d10 + d12 + d20 + d100a
-      setAllTotal(sum)
     }
   }
 
   const dTen = () => {
     let output = Math.floor(Math.random() * 10)
     setD10(output)
-    let sum = d4 + d6 + d8 + d10 + d12 + d20 + d100a
-    setAllTotal(sum)
   }
 
   const dTwelve = () => {
@@ -60,8 +67,6 @@ function App() {
       dTwelve()
     } else {
       setD12(output)
-      let sum = d4 + d6 + d8 + d10 + d12 + d20 + d100a
-      setAllTotal(sum)
     }
   }
 
@@ -71,8 +76,6 @@ function App() {
       dTwenty()
     } else {
       setD20(output)
-      let sum = d4 + d6 + d8 + d10 + d12 + d20 + d100a
-      setAllTotal(sum)
     }
   }
 
@@ -82,12 +85,11 @@ function App() {
       dOneHundred()
     } else {
       setd100a(output)
-      let sum = d4 + d6 + d8 + d10 + d12 + d20 + d100a
-      setAllTotal(sum)
     }
   }
 
   const fireAll = () => {
+    coinFLip()
     dFour()
     dSix()
     dEight()
@@ -98,13 +100,20 @@ function App() {
   }
 
   const zeroOut = () => {
-    setD4('✶')
-    setD6('✶')
-    setD8('✶')
-    setD10('✶')
-    setD12('✶')
-    setD20('✶')
-    setd100a('✶')
+    setCoin('')
+    setCoinVal('')
+    setD4('')
+    setD6('')
+    setD8('')
+    setD10('')
+    setD12('')
+    setD20('')
+    setd100a('')
+  }
+
+  const tally = () => {
+    let sum = coinVal + d4 + d6 + d8 + d10 + d12 + d20 + d100a
+    setAllTotal(sum)
   }
 
   return (
@@ -113,12 +122,22 @@ function App() {
         <h1>DICE ROLLER</h1>
         <img className="logo" src={logo} />
       </div>
-      <p className="die_type">For now put the dice total here {allTotal}</p>
       <div className="table">
+        <div className="die">
+          <h1 className="die_type">Coin</h1>
+          <button
+            className="coin"
+            onClick={() => {
+              coinFLip()
+            }}
+          >
+            {coin}
+          </button>
+        </div>
         <div className="die">
           <h1 className="die_type">D4</h1>
           <button
-            className="dice_button"
+            className="triangle"
             onClick={() => {
               dFour()
             }}
@@ -129,7 +148,7 @@ function App() {
         <div className="die">
           <h1 className="die_type">D6</h1>
           <button
-            className="dice_button"
+            className="square"
             onClick={() => {
               dSix()
             }}
@@ -140,7 +159,7 @@ function App() {
         <div className="die">
           <h1 className="die_type">D8</h1>
           <button
-            className="dice_button"
+            className="triangle"
             onClick={() => {
               dEight()
             }}
@@ -151,7 +170,7 @@ function App() {
         <div className="die">
           <h1 className="die_type">D10</h1>
           <button
-            className="dice_button"
+            className="kite"
             onClick={() => {
               dTen()
             }}
@@ -162,7 +181,7 @@ function App() {
         <div className="die">
           <h1 className="die_type">D12</h1>
           <button
-            className="dice_button"
+            className="pentagon"
             onClick={() => {
               dTwelve()
             }}
@@ -173,7 +192,7 @@ function App() {
         <div className="die">
           <h1 className="die_type">D20</h1>
           <button
-            className="dice_button"
+            className="triangle"
             onClick={() => {
               dTwenty()
             }}
@@ -184,7 +203,7 @@ function App() {
         <div className="die">
           <h1 className="die_type">D100</h1>
           <button
-            className="dice_button"
+            className="hex"
             onClick={() => {
               dOneHundred()
             }}
@@ -204,12 +223,21 @@ function App() {
           <button
             className="control_button"
             onClick={() => {
+              tally()
+            }}
+          >
+            Tally
+          </button>
+          <button
+            className="control_button"
+            onClick={() => {
               zeroOut()
             }}
           >
             Reset
           </button>
         </div>
+        <p className="die_type">Tally: {allTotal}</p>
       </div>
     </div>
   )
