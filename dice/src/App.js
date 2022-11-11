@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import logo from './assets/d20.png'
-import coinLogo from './assets/coin.png'
-
+import D4 from './components/d4'
+import D6 from './components/d6'
 import './App.css'
 
 function App() {
   const [coin, setCoin] = useState('')
   const [coinVal, setCoinVal] = useState('')
-  const [d4, setD4] = useState('')
-  const [d6, setD6] = useState('')
+
   const [d8, setD8] = useState('')
   const [d10, setD10] = useState('')
   const [d12, setD12] = useState('')
@@ -26,24 +25,6 @@ function App() {
     } else if (output === 2) {
       setCoin('T')
       setCoinVal(output)
-    }
-  }
-
-  const dFour = () => {
-    let output = Math.floor(Math.random() * 5)
-    if (output === 0) {
-      dFour()
-    } else {
-      setD4(output)
-    }
-  }
-
-  const dSix = () => {
-    let output = Math.floor(Math.random() * 7)
-    if (output === 0) {
-      dSix()
-    } else {
-      setD6(output)
     }
   }
 
@@ -90,8 +71,6 @@ function App() {
 
   const fireAll = () => {
     coinFLip()
-    dFour()
-    dSix()
     dEight()
     dTen()
     dTwelve()
@@ -102,18 +81,11 @@ function App() {
   const zeroOut = () => {
     setCoin('')
     setCoinVal('')
-    setD4('')
-    setD6('')
     setD8('')
     setD10('')
     setD12('')
     setD20('')
     setd100a('')
-  }
-
-  const tally = () => {
-    let sum = coinVal + d4 + d6 + d8 + d10 + d12 + d20 + d100a
-    setAllTotal(sum)
   }
 
   return (
@@ -134,28 +106,9 @@ function App() {
             {coin}
           </button>
         </div>
-        <div className="die">
-          <h1 className="die_type">D4</h1>
-          <button
-            className="triangle"
-            onClick={() => {
-              dFour()
-            }}
-          >
-            {d4}
-          </button>
-        </div>
-        <div className="die">
-          <h1 className="die_type">D6</h1>
-          <button
-            className="square"
-            onClick={() => {
-              dSix()
-            }}
-          >
-            {d6}
-          </button>
-        </div>
+        <D4 />
+        <D6 />
+
         <div className="die">
           <h1 className="die_type">D8</h1>
           <button
@@ -220,14 +173,7 @@ function App() {
           >
             All
           </button>
-          <button
-            className="control_button"
-            onClick={() => {
-              tally()
-            }}
-          >
-            Tally
-          </button>
+          <button className="control_button">Tally</button>
           <button
             className="control_button"
             onClick={() => {
